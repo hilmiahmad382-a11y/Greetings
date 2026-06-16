@@ -206,6 +206,46 @@ button{
 <div class="option" onclick="selectAnswer('q10','d',this)">D. Farewell</div>
 </div>
 
+<div class="question">
+11. What do you say to someone right before they go to sleep?
+<div class="option" onclick="selectAnswer('q11','a',this)">A. Good evening</div>
+<div class="option" onclick="selectAnswer('q11','b',this)">B. Good night</div>
+<div class="option" onclick="selectAnswer('q11','c',this)">C. Hello</div>
+<div class="option" onclick="selectAnswer('q11','d',this)">D. How's it going?</div>
+</div>
+
+<div class="question">
+12. Which of these is a casual farewell when leaving friends?
+<div class="option" onclick="selectAnswer('q12','a',this)">A. It is an honor to meet you</div>
+<div class="option" onclick="selectAnswer('q12','b',this)">B. Catch you later!</div>
+<div class="option" onclick="selectAnswer('q12','c',this)">C. Good afternoon</div>
+<div class="option" onclick="selectAnswer('q12','d',this)">D. How do you do?</div>
+</div>
+
+<div class="question">
+13. If someone says "Welcome to our school!", what should you say back?
+<div class="option" onclick="selectAnswer('q13','a',this)">A. Goodbye</div>
+<div class="option" onclick="selectAnswer('q13','b',this)">B. Thank you!</div>
+<div class="option" onclick="selectAnswer('q13','c',this)">C. What's up?</div>
+<div class="option" onclick="selectAnswer('q13','d',this)">D. I am fine</div>
+</div>
+
+<div class="question">
+14. Which expression is the most formal way to say goodbye to a client?
+<div class="option" onclick="selectAnswer('q14','a',this)">A. See ya</div>
+<div class="option" onclick="selectAnswer('q14','b',this)">B. Goodbye, have a wonderful day</div>
+<div class="option" onclick="selectAnswer('q14','c',this)">C. Later!</div>
+<div class="option" onclick="selectAnswer('q14','d',this)">D. Bye-bye</div>
+</div>
+
+<div class="question">
+15. If a friend says "Have a nice weekend!", how do you reply?
+<div class="option" onclick="selectAnswer('q15','a',this)">A. Thanks, you too!</div>
+<div class="option" onclick="selectAnswer('q15','b',this)">B. Good morning</div>
+<div class="option" onclick="selectAnswer('q15','c',this)">C. No, thank you</div>
+<div class="option" onclick="selectAnswer('q15','d',this)">D. Welcome</div>
+</div>
+
 <button onclick="submitQuiz()">Submit Quiz</button>
 
 <div class="result" id="result"></div>
@@ -238,7 +278,8 @@ button{
 // ANSWERS
 const answers = {
 q1:"a", q2:"b", q3:"c", q4:"b", q5:"b",
-q6:"a", q7:"b", q8:"a", q9:"b", q10:"b"
+q6:"a", q7:"b", q8:"a", q9:"b", q10:"b",
+q11:"b", q12:"b", q13:"b", q14:"b", q15:"a"
 };
 
 // EXPLANATIONS
@@ -252,7 +293,12 @@ q6:"Reciprocating with 'Nice to meet you too' is the proper social response.",
 q7:"'Long time no see' is a phrase specifically reserved for old acquaintances.",
 q8:"'Good evening' is a greeting for nighttime, while 'Good night' is for parting or sleep.",
 q9:"'How's everything going?' functions the same as asking about someone's well-being.",
-q10:"'What's up?' inquiries into what a person is currently up to in a friendly manner."
+q10:"'What's up?' inquiries into what a person is currently up to in a friendly manner.",
+q11:"'Good night' is used exclusively when parting late at night or right before going to bed.",
+q12:"'Catch you later!' is a widely used casual parting phrase among friends.",
+q13:"Saying 'Thank you!' shows appreciation for someone welcoming you.",
+q14:"'Goodbye, have a wonderful day' maintains a polite, professional corporate boundary.",
+q15:"'Thanks, you too!' properly accepts and returns a friendly weekend wish."
 };
 
 // SELECTED ANSWERS
@@ -285,7 +331,8 @@ if (!name || !cls) {
 let score = 0;
 let output = "";
 
-for(let i=1;i<=10;i++){
+// Expanded loop to check all 15 questions
+for(let i=1;i<=15;i++){
 
 if(selectedAnswers["q"+i] === answers["q"+i]){
 score++;
@@ -306,12 +353,12 @@ localStorage.setItem("ranking", JSON.stringify(ranking));
 
 loadRanking();
 
-// UPDATE TAMPILAN RESULT
+// UPDATE TAMPILAN RESULT OUT OF 15
 document.getElementById("result").innerHTML = `
 <h3>🎯 Result</h3>
 Name: ${name}<br>
 Class: ${cls}<br>
-Score: ${score}/10<br>
+Score: ${score}/15<br>
 Time: ${time}<br>
 <span id="save-status" style="color: #f39c12; font-weight: bold; margin-top:10px; display:inline-block;">🔄 Saving to Server/Excel...</span>
 `;
@@ -322,7 +369,7 @@ showPopup(output);
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNy0INk-z1jDesKlPZhfWD-5H30Pd0BGPcgcXZ99vBcPbFByPt5x21YTyjnKvWpz4s/exec";
 
 let dataToSave = {
-    quizType: "Greetings Quiz", // <-- Add this line
+    quizType: "greetings",
     name: name,
     class: cls,
     score: score,
